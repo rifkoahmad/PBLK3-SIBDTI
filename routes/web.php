@@ -68,6 +68,9 @@ Route::get('/data-kategori-berita', [KategoriBeritaController::class, 'index'])-
 
 //Dosen
 Route::get('/data-dosen', [DosenController::class, 'index'])->name('dosen.index');
+// Create Dosen
+Route::get('/create-dosen', [DosenController::class, 'create'])->name('dosen.create');
+Route::post('/dosen', [DosenController::class, 'store'])->name('dosen.store');
 
 //Mahasiswa
 Route::get('/data-mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');

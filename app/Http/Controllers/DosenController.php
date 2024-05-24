@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
 {
@@ -11,7 +13,8 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('admin.dosen.index');
+        $dosens = Dosen::all();
+        return view('admin.dosen.index', compact('dosens'));
     }
 
     /**
@@ -19,7 +22,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dosen.create');
     }
 
     /**
@@ -27,7 +30,30 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'nama' => 'required|string|max:100',
+            'nip' => 'required|string|max:20|unique:dosens,nip',
+            'jabatan_akademik' => 'nullable|string|max:50',
+            'no_telepon' => 'nullable|string|max:20',
+            'email' => 'nullable|string|email|max:100',
+            'foto' => 'nullable|mimes:jpg,jpeg,png,gif|max:5000',
+        ]);
+
+        // $foto  = $request->file('foto');
+        // $filename = date('Y-m-d').$foto->getClientOriginalName();
+        // $path = 'foto-dosen/'.$filename;
+
+        // Storage::disk('public')->put($path,file_get_contents($foto));
+
+        // $data['image'] =$filename;
+
+        $dosen = Dosen::create($validateData);
+        if($dosen){
+            return to_route('dosen.index')->with('success', 'Berhasil Menambah Data');
+        } else{
+            return to_route('dosen.index')->with('failed', 'Gagal Menambah Data');
+        }
+
     }
 
     /**
