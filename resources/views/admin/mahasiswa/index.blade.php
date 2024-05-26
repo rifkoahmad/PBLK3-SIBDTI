@@ -28,7 +28,7 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Nama Mahasiswa</th>
                                     <th>Nim</th>
                                     <th>Program Studi</th>

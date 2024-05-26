@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -11,7 +12,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        return view('admin.barang.index');
+        $barangs = Barang::all();
+        return view('admin.barang.index', compact('barangs'));
     }
 
     /**
@@ -19,7 +21,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.barang.create');
     }
 
     /**
@@ -27,7 +29,21 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'kode_barang' => 'string|required|unique:barangs|max:20',
+            'nama_barang' => 'string|required|max:100',
+            'kategori' => 'string|required|max:50',
+            'jumlah' => 'integer|required|min:0',
+            'posisi' => 'string|nullable|max:100',
+            'foto' => 'nullable|mimes:jpg,jpeg,png,gif|max:5000'
+        ]);
+
+        $barang = Barang::create($validateData);
+        if($barang){
+            return to_route('barang.index')->with('success', 'Berhasil Menambah Data');
+        } else{
+            return to_route('barang.index')->with('failed', 'Gagal Menambah Data');
+        }
     }
 
     /**

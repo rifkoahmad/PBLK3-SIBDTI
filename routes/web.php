@@ -47,24 +47,39 @@ Route::get('/dashboard', [DasboardController::class, 'index'])->name('dashboard.
 
 //Barang
 Route::get('/data-barang', [BarangController::class, 'index'])->name('barang.index');
+// Create Barang
+Route::get('/create-barang', [BarangController::class, 'create'])->name('barang.create');
+Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
 
 //Barang Masuk
 Route::get('/data-barang-masuk', [BarangMasukController::class, 'index'])->name('barangmasuk.index');
+// Create Barang Masuk
+Route::get('/create-barang-masuk', [BarangMasukController::class, 'create'])->name('barangmasuk.create');
+Route::post('/barang-masuk', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
 
 //Barang Keluar
 Route::get('data-barang-keluar', [BarangKeluarController::class, 'index'])->name('barangkeluar.index');
+// Create Barang Keluar
+Route::get('/create-barang-keluar', [BarangKeluarController::class, 'create'])->name('barangkeluar.create');
+Route::post('/barang-keluar', [BarangKeluarController::class, 'store'])->name('barangkeluar.store');
 
 //Peminjaman
 Route::get('/data-peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+// Create Peminjaman
+Route::get('/create-peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 
 //Pengembalian
 Route::get('/data-pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+// Create Pengembalian
+Route::get('/create-pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
+Route::post('/pengembalian', [PengembalianController::class, 'store'])->name('pengembalian.store');
 
 //Berita
 Route::get('/data-berita', [BeritaController::class, 'index'])->name('berita.index');
-
-//Kategori Berita
-Route::get('/data-kategori-berita', [KategoriBeritaController::class, 'index'])->name('kategoriberita.index');
+// Create Berita
+Route::get('/create-berita', [BeritaController::class, 'create'])->name('berita.create');
+Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
 
 //Dosen
 Route::get('/data-dosen', [DosenController::class, 'index'])->name('dosen.index');

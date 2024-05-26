@@ -10,6 +10,17 @@
                         <h4 class="card-title text-center">Tabel Dosen</h4>
                         <a class="btn btn-primary" href="{{ route('dosen.create') }}">Tambah Dosen</a>
                     </div>
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          @elseif (session()->has('failed'))
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              {{ session('failed') }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                     <div class="card-content">
                     </div>
                     <!-- table bordered -->
@@ -17,7 +28,7 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Nama Dosen</th>
                                     <th>Nip</th>
                                     <th>Email</th>

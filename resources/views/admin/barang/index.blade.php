@@ -7,8 +7,20 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Tabel barang</h4>
+                        <h4 class="card-title text-center">Tabel barang</h4>
+                        <a class="btn btn-primary" href="{{ route('barang.create') }}">Tambah Barang</a>
                     </div>
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          @elseif (session()->has('failed'))
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              {{ session('failed') }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                     <div class="card-content">
                     </div>
                     <!-- table bordered -->
@@ -17,28 +29,27 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Barang</th>
                                     <th>Nama Barang</th>
-                                    <th>Kategori Barang</th>
-                                    <th>Deskripsi</th>
-                                    <th>Stok</th>
-                                    <th>Harga</th>
+                                    <th>Kategori</th>
+                                    <th>Jumlah</th>
                                     <th>Posisi</th>
                                     <th>Foto</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($barangs as $barang)
                                 <tr>
-                                    <td>1</td>
-                                    <td class="text-bold-500">Alice Johnson</td>
-                                    <td>Laptop</td>
-                                    <td>High-end gaming laptop</td>
-                                    <td>50 Units</td>
-                                    <td>Rp 25.000.000</td>
-                                    <td>Warehouse A</td>
-                                    <td class="text-bold-500">PNG</td>
-                                    <td><a href="#"><i class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                data-feather="mail"></i></a></td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $barang->kode_barang }}</td>
+                                    <td>{{ $barang->nama_barang }}</td>
+                                    <td>{{ $barang->kategori }}</td>
+                                    <td>{{ $barang->jumlah }}</td>
+                                    <td>{{ $barang->posisi }}</td>
+                                    <td>{{ $barang->foto }}</td>
+                                </tr>
+                                @endforeach
                                 </tr>
                             </tbody>
                         </table>

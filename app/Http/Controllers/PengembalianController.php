@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengembalian;
 use Illuminate\Http\Request;
 
 class PengembalianController extends Controller
@@ -11,7 +12,8 @@ class PengembalianController extends Controller
      */
     public function index()
     {
-        return view('admin.pengembalian.index');
+        $pengembalians = Pengembalian::all();
+        return view('admin.pengembalian.index', compact('pengembalians'));
     }
 
     /**
@@ -19,7 +21,7 @@ class PengembalianController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pengembalian.create');
     }
 
     /**
@@ -27,7 +29,17 @@ class PengembalianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id_barang_pinjam' => 'required|integer',
+            'tanggal_kembali' => 'required|date'
+        ]);
+
+        $pengembalian = Pengembalian::create($validatedData);
+        if($pengembalian){
+            return to_route('pengembalian.index')->with('success', 'Berhasil Menambah Data');
+        } else{
+            return to_route('pengembalian.index')->with('failed', 'Gagal Menambah Data');
+        }
     }
 
     /**

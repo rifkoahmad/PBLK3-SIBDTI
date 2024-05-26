@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
@@ -11,7 +12,8 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        return view('admin.barangkeluar.index');
+        $barang_keluars = BarangKeluar::all();
+        return view('admin.barangkeluar.index', compact('barang_keluars'));
     }
 
     /**
@@ -19,7 +21,7 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.barangkeluar.create');
     }
 
     /**
@@ -27,7 +29,18 @@ class BarangKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'id_barang' => 'required|integer',
+            'jumlah' => 'required|integer',
+            'tanggal_keluar' => 'required|date',
+        ]);
+
+        $barangmasuk = BarangKeluar::create($validateData);
+        if($barangmasuk){
+            return to_route('barangkeluar.index')->with('success', 'Berhasil Menambah Data');
+        } else{
+            return to_route('barangkeluar.index')->with('failed', 'Gagal Menambah Data');
+        }
     }
 
     /**

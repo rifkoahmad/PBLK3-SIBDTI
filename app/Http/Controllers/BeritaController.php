@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
@@ -11,7 +12,8 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        return view('admin.berita.index');
+        $beritas = Berita::all();
+        return view('admin.berita.index', compact('beritas'));
     }
 
     /**
@@ -19,7 +21,7 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.berita.create');
     }
 
     /**
@@ -27,7 +29,21 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'judul' => 'required|string|max:100',
+            'isi' => 'required|string',
+            'kategori' => 'required|string|max:50',
+            'gambar' => 'nullable|string|max:255',
+            'tanggal_publikasi' => 'required|date',
+        ]);
+
+        $berita = Berita::create($validateData);
+        if($berita){
+            return to_route('berita.index')->with('success', 'Berhasil Menambah Data');
+        } else{
+            return to_route('berita.index')->with('failed', 'Gagal Menambah Data');
+        }
+
     }
 
     /**

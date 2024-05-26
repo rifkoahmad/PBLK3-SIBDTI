@@ -47,62 +47,56 @@
 
                 <li class="sidebar-item active ">
                     <a href="{{ route('dashboard.index') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
+                        <i class="bi bi-speedometer2"></i> <!-- Icon untuk Dashboard -->
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a href="{{ route('barang.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-archive"></i> <!-- Icon untuk Barang -->
                         <span>Barang</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('barangmasuk.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-arrow-down-circle-fill"></i> <!-- Icon untuk Barang Masuk -->
                         <span>Barang Masuk</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('barangkeluar.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-arrow-up-circle-fill"></i> <!-- Icon untuk Barang Keluar -->
                         <span>Barang Keluar</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('peminjaman.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-arrow-down-circle"></i> <!-- Icon untuk Peminjaman -->
                         <span>Peminjaman</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('pengembalian.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-arrow-up-circle"></i> <!-- Icon untuk Pengembalian -->
                         <span>Pengembalian</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('berita.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-newspaper"></i> <!-- Icon untuk Berita -->
                         <span>Berita</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('kategoriberita.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Kategori Berita</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a href="{{ route('dosen.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-person"></i> <!-- Icon untuk Dosen -->
                         <span>Dosen</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('mahasiswa.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-person"></i> <!-- Icon untuk Mahasiswa -->
                         <span>Mahasiswa</span>
                     </a>
                 </li>
@@ -110,13 +104,13 @@
 
                 <li class="sidebar-item">
                     <a href="{{ route('user.index') }}" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
+                        <i class="bi bi-person-badge-fill"></i> <!-- Icon untuk User -->
                         <span>User</span>
                     </a>
                 </li>
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
+                        <i class="bi bi-shield-lock-fill"></i> <!-- Icon untuk Authentication -->
                         <span>Authentication</span>
                     </a>
                     <ul class="submenu ">
@@ -135,7 +129,10 @@
                     @auth
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button class="btn btn-danger">Logout</button>
+                            <button class="btn btn-danger btn-sm"> <!-- Tombol Logout dengan ukuran yang sama -->
+                                <i class="bi bi-box-arrow-left"></i> <!-- Icon untuk Logout -->
+                                Logout
+                            </button>
                         </form>
                     @endauth
                 </li>

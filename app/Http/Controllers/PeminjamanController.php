@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -11,7 +12,8 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        return view('admin.peminjaman.index');
+        $peminjamen = Peminjaman::all();
+        return view('admin.peminjaman.index', compact('peminjamen'));
     }
 
     /**
@@ -19,7 +21,7 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.peminjaman.create');
     }
 
     /**
@@ -27,7 +29,22 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id_barang' => 'required|integer',
+            'id_peminjam' => 'required|integer',
+            'tanggal_pinjam' => 'required|date',
+            'tanggal_kembali' => 'required|date',
+            'status' => 'required|in:Dipinjam,Dikembalikan'
+        ]);
+
+        $peminjaman = Peminjaman::create($validatedData);
+        if($peminjaman){
+            return to_route('peminjaman.index')->with('success', 'Berhasil Menambah Data');
+        } else{
+            return to_route('peminjaman.index')->with('failed', 'Gagal Menambah Data');
+        }
+
+
     }
 
     /**
